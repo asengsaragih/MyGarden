@@ -13,10 +13,11 @@ import static com.example.android.mygarden.PlantWateringService.ACTION_WATER_PLA
 
 public class PlantWidgetProvider extends AppWidgetProvider {
 
-    static void updateWidget(Context context, AppWidgetManager manager, int id) {
+    static void updateWidget(Context context, AppWidgetManager manager, int imgRes, int id) {
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.plant_widget);
+        remoteViews.setImageViewResource(R.id.widget_plant_image, imgRes);
         remoteViews.setOnClickPendingIntent(R.id.widget_plant_image, pendingIntent);
 
         Intent i = new Intent(context, PlantWateringService.class);
@@ -26,10 +27,14 @@ public class PlantWidgetProvider extends AppWidgetProvider {
         manager.updateAppWidget(id, remoteViews);
     }
 
+    public static void updatePlantWidget(Context context, AppWidgetManager manager, int imgRes, int[] ids) {
+        for (int id : ids) {
+            updateWidget(context, manager, imgRes, id);
+        }
+    }
+
     @Override
     public void onUpdate(Context context, AppWidgetManager manager, int[] ids) {
-        for (int id : ids) {
-            updateWidget(context, manager, id);
-        }
+        PlantWateringService.startActionUpdatePlants(context);
     }
 }
