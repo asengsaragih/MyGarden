@@ -3,8 +3,8 @@
 <appwidget-provider
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/plant_widget"
-    android:minHeight="400dp"
-    android:minWidth="400dp"
+    android:minHeight="40dp"
+    android:minWidth="40dp"
     android:previewImage="@drawable/launcher_icon"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="1800000"
